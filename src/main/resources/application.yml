@@ -9,6 +9,23 @@ spring:
 #    include: database, redis, mail, jwt, storage, port
     include: database, mail, jwt, port, oauth, redis, iamport, s3
 
+  quartz:
+    job-store-type: memory
+
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceName: VipScheduler
+            instanceId: AUTO
+
+          threadPool:
+            threadCount: 3
+
+          jobStore:
+            class: org.quartz.simpl.RAMJobStore
+            misfireThreshold: 60000
+
 logging:
   level:
     org.hibernate.sql: debug
